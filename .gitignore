@@ -1,0 +1,27 @@
+# Environment variables
+.env
+
+# Compiled output
+dist/
+build/
+
+# Dependencies
+node_modules/
+npm-debug.log
+
+
+# Prisma local database (if using SQLite)
+prisma/dev.db
+
+# Editor/system files
+.vscode/
+.idea/
+.DS_Store
+desktop.ini
+
+# Temporary files
+*.log
+*.bak
+*.tmp
+
+*.md
