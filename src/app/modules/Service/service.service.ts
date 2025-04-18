@@ -79,20 +79,15 @@ export const deleteService = async (serviceId: string) => {
   });
 };
 
-export const getOverdueOrPendingServices = async () => {
-  const now = new Date();
-  const sevenDaysAgo = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() - 7, 23, 59, 59, 999));
-  console.log("Seven days ago:", sevenDaysAgo); // Debug log
-
+export const getPendingOrOverdueServices = async () => {
+  const currentDate = new Date();
   return prisma.serviceRecord.findMany({
     where: {
       OR: [
-        { status: "pending" },
-        { status: "in_progress" },
+        { status: 'pending' },
+        { status: 'in_progress' },
+        { serviceDate: { lte: currentDate }, status: { not: 'done' } },
       ],
-      serviceDate: {
-        lte: sevenDaysAgo,
-      },
     },
   });
 };

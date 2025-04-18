@@ -1,14 +1,19 @@
 import { z } from 'zod';
 
 export const createServiceSchema = z.object({
-  bikeId: z.string().uuid('Invalid bike ID format'),
-  serviceDate: z.string().datetime('Invalid date format'),
-  description: z.string().min(1, 'Description is required'),
-  status: z.enum(['PENDING', 'IN_PROGRESS', 'DONE'], {
-    errorMap: () => ({ message: 'Status must be one of: PENDING, IN_PROGRESS, DONE' }),
-  }),
+  bikeId: z.string().uuid(),
+  serviceDate: z.string().datetime(),
+  description: z.string(),
+  status: z.enum(['pending', 'in_progress', 'done']),
+});
+
+export const updateServiceSchema = z.object({
+  bikeId: z.string().uuid().optional(),
+  serviceDate: z.string().datetime().optional(),
+  description: z.string().optional(),
+  status: z.enum(['pending', 'in_progress', 'done']).optional(),
 });
 
 export const completeServiceSchema = z.object({
-  completionDate: z.string().datetime('Invalid date format'),
+  completionDate: z.string().datetime(),
 });

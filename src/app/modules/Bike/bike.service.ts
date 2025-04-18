@@ -21,6 +21,10 @@ export const createBike = async (data: { brand: string; model: string; year: num
   });
 };
 
+export const getAllBikes = async () => {
+  return await prisma.bike.findMany();
+};
+
 export const getBikeById = async (bikeId: string) => {
   return await prisma.bike.findUnique({
     where: { bikeId },
